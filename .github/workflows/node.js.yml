@@ -25,16 +25,14 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: 12.x
-    - run: npm i
-    # - run: npm start
-    - run: npm test
+    
     -
       name: Set up QEMU
       uses: docker/setup-qemu-action@v1
     -
       name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
-    - run : ls -lah
+
     -
       name: Login to DockerHub
       uses: docker/login-action@v1 
@@ -48,6 +46,10 @@ jobs:
       with:
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/web-server:latest
+    - run : ls -lah
+    - run: npm i
+    # - run: npm start
+    - run: npm test
     -
       name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
