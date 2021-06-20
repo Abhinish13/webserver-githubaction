@@ -39,6 +39,10 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - run : ls -lah
+    - run: npm i
+    # - run: npm start
+    - run: npm test
     -
       name: Build and push
       id: docker_build
@@ -46,10 +50,7 @@ jobs:
       with:
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/web-server:latest
-    - run : ls -lah
-    - run: npm i
-    # - run: npm start
-    - run: npm test
+    
     -
       name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
